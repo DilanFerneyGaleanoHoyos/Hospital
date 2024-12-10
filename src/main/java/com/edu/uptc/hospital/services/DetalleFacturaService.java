@@ -9,12 +9,9 @@ import java.util.List;
 
 @Service
 public class DetalleFacturaService {
+
     @Autowired
     private DetalleFacturaRepository detalleFacturaRepository;
-
-    public void guardarDetalle(DetalleFacturaModel detalleFacturaModel) {
-        detalleFacturaRepository.save(detalleFacturaModel);
-    }
 
     public List<DetalleFacturaModel> findAll(){
         return detalleFacturaRepository.findAll();
