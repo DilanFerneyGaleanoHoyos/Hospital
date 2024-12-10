@@ -34,5 +34,10 @@ public class HistoriaClinicaService {
     public HistoriaClinicaModel update(HistoriaClinicaModel historiaClinicaModel) {
         return historiaClinicaRepository.save(historiaClinicaModel);
     }
+    
+      // Nuevo método
+      public List<HistoriaClinicaModel> findByPacienteId(Long pacienteId) {
+        return historiaClinicaRepository.findByPacienteId(pacienteId);
+    }
 
 }

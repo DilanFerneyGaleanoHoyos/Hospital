@@ -1,7 +1,9 @@
 package com.edu.uptc.hospital.controllers;
 
+import com.edu.uptc.hospital.entities.HistoriaClinicaModel;
 import com.edu.uptc.hospital.entities.PacienteModel;
 import com.edu.uptc.hospital.responses.ResponseHandler;
+import com.edu.uptc.hospital.services.HistoriaClinicaService;
 import com.edu.uptc.hospital.services.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,8 @@ import java.util.List;
 @RequestMapping("/paciente")
 public class PacienteController {
 
+    @Autowired
+    private HistoriaClinicaService historiaClinicaService;
     @Autowired
     private PacienteService pacienteService;
 
@@ -67,5 +71,16 @@ public class PacienteController {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null );
         }
     }
-
+     // Nuevo endpoint
+    @GetMapping("/paciente/{pacienteId}")
+    public ResponseEntity<Object> findByPacienteId(@PathVariable Long pacienteId) {
+        try {
+            List<HistoriaClinicaModel> result = historiaClinicaService.findByPacienteId(pacienteId);
+            return ResponseHandler.generateResponse("Success", HttpStatus.OK, result);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
 }
+
+
