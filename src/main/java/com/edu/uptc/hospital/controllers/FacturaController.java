@@ -40,7 +40,10 @@ public class FacturaController {
         }
     }
 
-
+    @PostMapping
+    public FacturaModel crearFactura(@RequestBody FacturaModel facturaModel) {
+        return facturaService.crearFactura(facturaModel);
+    }
 
     @Autowired
     private DetalleFacturaService detalleFacturaService;
