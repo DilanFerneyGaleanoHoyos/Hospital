@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Factura")
@@ -29,5 +30,8 @@ public class FacturaModel {
 
     @Column(nullable = false)
     private double total;
+
+    @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL)
+    private List<DetalleFacturaModel> detalles;
 
 }

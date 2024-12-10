@@ -31,5 +31,4 @@ public class DetalleFacturaModel {
 
     @Column(nullable = false)
     private double subtotal;
-
 }
