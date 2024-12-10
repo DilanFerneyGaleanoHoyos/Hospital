@@ -30,6 +30,6 @@ public class FacturaModel {
     @Column(nullable = false)
     private double total;
 
-    
-
+    @Column(nullable = false)
+    private String servicio;  // Nueva columna para el servicio asociado
 }

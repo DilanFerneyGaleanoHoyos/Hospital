@@ -1,16 +1,12 @@
 package com.edu.uptc.hospital.controllers;
 
 import com.edu.uptc.hospital.entities.FacturaModel;
-import com.edu.uptc.hospital.responses.ResponseHandler;
 import com.edu.uptc.hospital.services.FacturaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping("/factura")
 public class FacturaController {
@@ -18,54 +14,34 @@ public class FacturaController {
     @Autowired
     private FacturaService facturaService;
 
+    // Obtener todas las facturas
     @GetMapping
-    public ResponseEntity<Object> findAll() {
-        try{
-            List<FacturaModel> result = facturaService.findAll();
-            return ResponseHandler.generateResponse("Success", HttpStatus.OK, result);
-        } catch (Exception e) {
-            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null );
-        }
+    public List<FacturaModel> findAll() {
+        return facturaService.findAll();
     }
 
+    // Obtener factura por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Object> findById(@RequestParam long id) {
-        try{
-            FacturaModel result = facturaService.findById(id);
-            return ResponseHandler.generateResponse("Success", HttpStatus.OK, result);
-        } catch (Exception e) {
-            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null );
-        }
+    public FacturaModel findById(@PathVariable Long id) {
+        return facturaService.findById(id);
     }
 
+    // Crear una nueva factura
     @PostMapping
-    public ResponseEntity<Object> save(@RequestBody FacturaModel factura) {
-        try{
-            FacturaModel result = facturaService.save(factura);
-            return ResponseHandler.generateResponse("Success", HttpStatus.OK, result);
-        } catch (Exception e) {
-            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null );
-        }
+    public FacturaModel save(@RequestBody FacturaModel facturaModel) {
+        return facturaService.save(facturaModel);
     }
 
+    // Eliminar una factura
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> delete(@PathVariable long id) {
-        try{
-            FacturaModel result = facturaService.delete(id);
-            return ResponseHandler.generateResponse("Success", HttpStatus.OK, result);
-        } catch (Exception e) {
-            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null );
-        }
+    public FacturaModel delete(@PathVariable Long id) {
+        return facturaService.delete(id);
     }
 
-    @PutMapping
-    public ResponseEntity<Object> update(@RequestBody FacturaModel factura) {
-        try{
-            FacturaModel result = facturaService.update(factura);
-            return ResponseHandler.generateResponse("Success", HttpStatus.OK, result);
-        } catch (Exception e) {
-            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null );
-        }
+    // Actualizar una factura
+    @PutMapping("/{id}")
+    public FacturaModel update(@PathVariable Long id, @RequestBody FacturaModel facturaModel) {
+        facturaModel.setId(id);
+        return facturaService.update(facturaModel);
     }
-
 }

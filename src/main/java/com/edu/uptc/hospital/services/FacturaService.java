@@ -13,26 +13,32 @@ public class FacturaService {
     @Autowired
     private FacturaRepository facturaRepository;
 
+    // Obtener todas las facturas
     public List<FacturaModel> findAll() {
         return facturaRepository.findAll();
     }
 
+    // Obtener una factura por su ID
     public FacturaModel findById(Long id) {
         return facturaRepository.findById(id).orElse(null);
     }
 
+    // Crear una nueva factura
     public FacturaModel save(FacturaModel facturaModel) {
         return facturaRepository.save(facturaModel);
     }
 
-    public FacturaModel delete(long id) {
+    // Eliminar una factura
+    public FacturaModel delete(Long id) {
         FacturaModel facturaModel = findById(id);
-        facturaRepository.delete(facturaModel);
+        if (facturaModel != null) {
+            facturaRepository.delete(facturaModel);
+        }
         return facturaModel;
     }
 
+    // Actualizar una factura
     public FacturaModel update(FacturaModel facturaModel) {
         return facturaRepository.save(facturaModel);
     }
-
 }
