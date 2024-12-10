@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class FacturaService {
 
-    @  @Autowired
+     @Autowired
     private FacturaRepository facturaRepository;
 
     @Autowired
